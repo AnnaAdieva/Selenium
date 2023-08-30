@@ -24,7 +24,7 @@ public class XYZbank {
     private By transaction2Type = By.xpath("//td[normalize-space()='Debit']");
 
     @Test
-    public void testXYZbank() {
+    public void testXYZbank() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:/Driver/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -64,12 +64,14 @@ public class XYZbank {
         driver.findElement(deposit).click();
         driver.findElement(amountInput).sendKeys("1000");
         driver.findElement(submitBTN).submit();
+        Thread.sleep(2000);
 
         String depositStatus = driver.findElement(message).getText();
         Assert.assertEquals(depositStatus, "Deposit Successful");
         System.out.println("Deposit Successful");
 
         driver.findElement(transactionsBTN).click();
+        Thread.sleep(2000);
         String creditAmount = driver.findElement(transaction1Amount).getText();
         Assert.assertEquals(creditAmount, "1000");
         System.out.println("Credit amount 1000");
@@ -81,12 +83,14 @@ public class XYZbank {
         driver.findElement(withdrawl).click();
         driver.findElement(amountInput).sendKeys("1000");
         driver.findElement(submitBTN).submit();
+        Thread.sleep(2000);
 
         String transactionStatus = driver.findElement(message).getText();
         Assert.assertEquals(transactionStatus, "Transaction successful");
         System.out.println("Transaction successful");
 
         driver.findElement(transactionsBTN).click();
+        Thread.sleep(2000);
         String transaction2 = driver.findElement(transaction2Type).getText();
         Assert.assertEquals(transaction2,"Debit");
         System.out.println("Transaction type Debit");
